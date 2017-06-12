@@ -44,8 +44,12 @@
     </head>
     <body>
         <div id="map"></div>
+        <button onclick="app.showAlert()">Exibe um Alerta</button>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZkCL0D6_WhjFocorrDaB_3olKJOaLEjY" type="text/javascript"></script>
+        <script>
+            app.initialize();
+        </script>
     </body>
 </html>

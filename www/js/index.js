@@ -26,16 +26,58 @@ var app = {
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
+        document.addEventListener('deviceready', this.onDeviceReady, false);   
     },
     // deviceready Event Handler
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
+   
+
     onDeviceReady: function() {
+        //navigator.geolocation.getCurrentPosition(app.onSuccess, app.onError);
+        //navigator.geolocation.watchPosition(app.onSuccess, app.onError, { timeout: 30000 });
+            
+        cordova.dialogGPS("Seu GPS está desabilitado, este aplicativo precisa ser habilitado para funcionar.",
+            "Use GPS, com wifi ou 3G",function(buttonIndex) {
+                switch(buttonIndex){
+                    case 0: break;
+                    case 1: break;
+                    case 2: break;
+                }
+            }, "Ligue o GPS", ["Cancelar", "Mais Tarde", "Ligar"]);
         navigator.geolocation.getCurrentPosition(app.onSuccess, app.onError);
     },
-    
+ 
+    // calldialog: function(){
+    //     document.addEventListener("deviceready",function() {
+    //         cordova.dialogGPS("Seu GPS está desabilitado, este aplicativo precisa ser habilitado para funcionar.",//message
+    //                 "Use GPS, com wifi ou 3G.",//description
+    //                 function(buttonIndex){//callback
+    //                   switch(buttonIndex) {
+    //                     case 0: break;//cancel
+    //                     case 1: break;//neutro option
+    //                     case 2: break;//user go to configuration
+    //                   }},
+    //                   "Please Turn on GPS",//title
+    //                   ["Cancel","Later","Go"]);//buttons
+    //     });
+    // }
+
+
+    // showAlert: function(){
+    //     function alertMensagem(){
+    //         alert('Usuário clicou no botão ok');
+    //     }
+
+    //     navigator.notification.alert(
+    //         'aqui e a mensagem do alerta',
+    //         alertMensagem, //callback
+    //         'aqui fica o titulo',
+    //         'Ok'
+    //     );
+    // },
+
     onSuccess: function(position){
 
         var longitude = position.coords.longitude;
@@ -53,13 +95,15 @@ var app = {
         var marker = new google.maps.Marker({
               position: latLong,
               map: map,
-              title: 'my location'
+              title: 'Minha localização'
           });
     },
-    
+  
     onError: function(error){
-        alert("cod erro " + error.code + ". \n" + 
-            "mensagem: " + error.message);
+    //    //document.getElementById("map").innerHTML = error.code;
+         alert("cod erro " + error.code+"mensagem: " + error.message);
+    //    // calldialog();
+    //    //console.log(error.code);
     }
+
 };
-app.initialize();
